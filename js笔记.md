@@ -1,4 +1,4 @@
-EVENT的三个阶段
+一、EVENT的三个阶段
 ================
 第一阶段 “捕获阶段（capture phase）”
 ------------------------------------
@@ -39,5 +39,8 @@ js:
  //Tag: 'DIV'. EventPhase: 'capture'  
  //Tag: 'P'. EventPhase: 'target'  
  //Tag: 'P'. EventPhase: 'target'  
- //Tag: 'DIV'. EventPhase: 'bubble'
-   
+ //Tag: 'DIV'. EventPhase: 'bubble'  
+ ### event.target与event.currentTarget的区别  
+ target属性返回触发事件的那个节点，即事件最初发生的节点  
+ 
+ 
