@@ -40,7 +40,34 @@ js:
  //Tag: 'P'. EventPhase: 'target'  
  //Tag: 'P'. EventPhase: 'target'  
  //Tag: 'DIV'. EventPhase: 'bubble'  
- ### event.target与event.currentTarget的区别  
- target属性返回触发事件的那个节点，即事件最初发生的节点  
+ ### event.target与event.currentTarget的区别
+ 
+ target属性返回触发事件的那个节点，即事件最初发生的节点
+ 
+    ![html结构示意图](https://github.com/shiwanqiong/webNotes/blob/master/div.png)  
+    如果最初点击到的区域是P区域，那么，event.target.tagName='P'  
+    如果最初点击的区域是div-p的区域，那么event.target.tagName='DIV'  
+    故，event.target即为“目标阶段”的节点  
+ currentTarget属性返回时间当前所在的节点，即正在执行的监听函数所绑定的节点  
+    如果监听函数在捕获阶段和冒泡阶段触发，那么currentTarget!=target  
+ 
+ ### 事件代理  
+ 由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听事件定义在父节点上，由父节点的监听函数统一处理多个子元素的事件。这种方法叫做事件代理。  
+ eg:  
+ 
+    var ul = document.querySelector('ul');
+
+    ul.addEventListener('click', function(event) {
+        if (event.target.tagName.toLowerCase() === 'li') {
+        // some code
+        }
+    });
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
  
