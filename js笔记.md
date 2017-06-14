@@ -24,10 +24,13 @@ js:
     var div = document.querySelector('div');
     var p = document.querySelector('p');
 
-    div.addEventListener('click', callback, true);//定义了捕获阶段的处理程序时才会触发，否则不会有执行
-    p.addEventListener('click', callback, true);
-    div.addEventListener('click', callback, false);//定义了冒泡阶段的处理程序时才会触发，否则不会执行
-    p.addEventListener('click', callback, false);
+    div.addEventListener('click', callback, true);//定义了捕获阶段的处理程序时才会触发，否则不会有执行  
+            
+        p.addEventListener('click', callback, true);  
+        
+        div.addEventListener('click', callback, false);//定义了冒泡阶段的处理程序时才会触发，否则不会执行   
+        
+        p.addEventListener('click', callback, false);
 
     function callback(event) {
       var tag = event.currentTarget.tagName;
