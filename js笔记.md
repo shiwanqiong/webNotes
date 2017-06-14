@@ -24,10 +24,10 @@ js:
     var div = document.querySelector('div');
     var p = document.querySelector('p');
 
-    div.addEventListener('click', callback, true);
-    p.addEventListener('click', callback, true);
-    div.addEventListener('click', callback, false);
-    p.addEventListener('click', callback, false);
+    div.addEventListener('click', callback, true);//定义了捕获阶段的处理程序时才会触发，否则不会有执行
+    p.addEventListener('click', callback, true);
+    div.addEventListener('click', callback, false);//定义了冒泡阶段的处理程序时才会触发，否则不会执行
+    p.addEventListener('click', callback, false);
 
     function callback(event) {
       var tag = event.currentTarget.tagName;
@@ -40,6 +40,7 @@ js:
  //Tag: 'P'. EventPhase: 'target'  
  //Tag: 'P'. EventPhase: 'target'  
  //Tag: 'DIV'. EventPhase: 'bubble'  
+ ### 在捕获阶段或者冒泡阶段执行顺序按照DOM事件流的顺序，而在目标阶段时，事件执行顺序按照事件绑定顺序
  ### event.target与event.currentTarget的区别
  
  target属性返回触发事件的那个节点，即事件最初发生的节点   
