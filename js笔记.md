@@ -66,7 +66,19 @@ js:
         if (event.target.tagName.toLowerCase() === 'li') {
         // some code
         }
-    });  
+    });  
+    
+### 事件绑定的三种方法  
+a>  
+    
+    <div onclick="callback(e)"></div>  
+b>  
+
+    div.onclick=funcion(){...}  
+c>  
+
+    div.addEventListener('click',callBack,false);  
+    IE:div.attachEvent('onclick',callback);
     
 ## 二、AJAX
 ### 1、XMLhttpRequest对象(XMLHttpRequest对象用来在浏览器与服务器之间传送数据)
