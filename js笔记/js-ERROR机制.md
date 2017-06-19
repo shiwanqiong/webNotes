@@ -4,6 +4,7 @@
 - message：错误提示信息  
 - name：错误名称（非标准属性）  
 - stack：错误的堆栈（非标准属性）  
+
 二、js原生错误类型  
  
 - **SyntaxError**  
