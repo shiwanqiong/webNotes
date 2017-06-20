@@ -4,6 +4,7 @@
 - message：错误提示信息  
 - name：错误名称（非标准属性）  
 - stack：错误的堆栈（非标准属性）  
+
 二、js原生错误类型  
  
 - **SyntaxError**  
@@ -33,7 +34,7 @@ eg:
  eval函数没有被正确执行时会抛出的错误
 	
  
-#### tyr->catch->finally ####
+#### 三、 tyr->catch->finally ####
 以下例子充分反映了try...catch...finally之间的执行顺序  
     
     function f(){
