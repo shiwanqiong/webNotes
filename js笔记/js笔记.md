@@ -105,7 +105,7 @@ c>
           }
 		xhr.onerror=function(){...} //定义error事件函数  
 		xhr.open('GRT','/endpoint',true);  //指定发送HTTP请求的参数(method,url,async,user,password)  
-		xhr.send(null) //发送HTTP请求  var xhr=new XMLHttpRequest();//声明XMLhttpRequest对象     
+		xhr.send(null) //发送HTTP请求   
 ## 三、Debounce 和 Throttle 的原理及实现 ## 
 ### 链接如下： ###  
 [Debounce 和 throttle 的原理及实现](http://hackll.com/2015/11/19/debounce-and-throttle/)
