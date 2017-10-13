@@ -1,3 +1,7 @@
+### 单行文字溢出省略 ###
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
 ### 多行省略 ###  
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
