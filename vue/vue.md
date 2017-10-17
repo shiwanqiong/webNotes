@@ -123,7 +123,48 @@ include、exclude属性允许组件有条件地缓存，二者都可以用逗号
 ### 七、判断角色进入不同的首页 ###
 问题描述：在main.js里面请求角色，然后根据角色类型跳转到不同的页面，使用router.push('...'),在内页调用原生的下拉刷新事件时会跳转到首页
   
-解决办法：添加一个过度页null.vue，main.js里面只获取角色，并存储在localstorage中，将判断逻辑写在null中进行转跳，使用router.replace('...')
+解决办法：添加一个过度页null.vue，main.js里面只获取角色，并存储在localstorage中，将判断逻辑写在null中进行转跳，使用router.replace('...')  
+
+### 八、beforeRouteEnter函数中获取this实例 ###
+
+	beforeRouteEnter(to,from,next){
+		next(vm=>{
+			//通过'vm'访问组件实例
+		})
+	}
+	//不能获取组件实例‘this’,因为当钩子执行前，组件实例还没有被创建
+
+#### beforeRouteUpdate、 beforeRouteLeave中可以直接访问组件实例this####
+
+	beforeRouteUpdate (to, from, next) {
+	    // 在当前路由改变，但是该组件被复用时调用
+	    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+	    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+	    // 可以访问组件实例 `this`
+  	},
+  	beforeRouteLeave (to, from, next) {
+	    // 导航离开该组件的对应路由时调用
+	    // 可以访问组件实例 `this`
+  	}  
+
+### 九、注册全局变量 ###
+	在main.js中import公共变量，然后使用Vue.property.name=variable注册
+
+	import variable from '...'
+	Vue.property.name=variable
+	在组件中的使用:this.name.attr；
+#### 注册全局类使用同样的方法 ####
+	util.js
+	class Hm{...}
+	export default Hm
+
+	main.js：
+	import Hm from '.../util.js'
+	Vue.prototype.HM=Hm;
+
+	组件中：
+	let hm=new this.HM();
+	
 
 
 	
