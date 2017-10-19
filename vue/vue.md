@@ -1,4 +1,4 @@
-### 一、全局注册filter ###
+<h3 id="1">一、[全局注册filter]</h3>
     vue.filter(id,definition);
 	eg:	 
 	Vue.filter('my-filter',function(value){
@@ -164,7 +164,23 @@ include、exclude属性允许组件有条件地缓存，二者都可以用逗号
 
 	组件中：
 	let hm=new this.HM();
+
+###十、watch监听路由$route,需要深度监听才能触发  ###
+
+	watch:{
+        $route:{
+          handler:function(to,from){
+            if(from.name=='ChooseTeacher'){
+              if(sessionStorage.getItem('choosedTeacher')){
+                this.teacher=sessionStorage.getItem('choosedTeacher');
+              }
+            }
+          },
+          deep:true
+        }
+      }
 	
+
 
 
 	
