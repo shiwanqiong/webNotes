@@ -179,6 +179,49 @@ include、exclude属性允许组件有条件地缓存，二者都可以用逗号
           deep:true
         }
       }
+### 十一、vue组件中css中的background-image路径问题 ###
+	
+	{
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+	limit是图片大小限制，当背景图大小大于limit时，webpack会将图片打包到dist/static/img文件夹中，而如果图片大小小于limit，会将其打包成base64形式打包在css文件中
+
+	路径配置：待定...
+
+### 十二、路由按需加载配置之后，路由参数为空的话，路由跳转错误 ###
+业务场景：  
+app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚归详情页面需要显示截至“推送时间...”情况，如果是从应用入口进去的显示“时间1-时间2”的情况，所以从汇总页到详情页需要添加一个时间参数，且该时间参数可能为空。**将路由配置为懒加载时，首次从汇总页跳转到详情页时路由跳转到了首页，继而从首页进入汇总页再跳转至详情页时又正常**
+	
+	 <router-link :to="{name:'LateDetail',params:{id:item.dormitory_id,urlTime:urlTime}}">
+        <p class="list-title">{{item.dormitory_name}}（{{item.headcount}}人）<span class="arr-right"></span></p>
+        <div class="sum-des">
+          ...
+          <dl>
+            <dt><span class="dot grey"></span>正常</dt>
+            <dd>{{item.normal}}人</dd>
+          </dl>
+        </div>
+     </router-link>
+	
+	路由配置如下：
+	{
+      path: '/lateDetail/:id/:urlTime'
+      name: 'LateDetail',
+      component: LateDetail,
+      meta:{keep_alive:false},
+      beforeEnter: (to, from, next) =>
+      {
+       ...
+      }
+    },
+	当从应用进入详情页时urlTime值为空，会出现上述情形，故将默认参数值改为0就ok了
+
+
 	
 
 
