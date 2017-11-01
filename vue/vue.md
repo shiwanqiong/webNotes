@@ -191,7 +191,35 @@ include、exclude属性允许组件有条件地缓存，二者都可以用逗号
       },
 	limit是图片大小限制，当背景图大小大于limit时，webpack会将图片打包到dist/static/img文件夹中，而如果图片大小小于limit，会将其打包成base64形式打包在css文件中
 
-	路径配置：待定...
+	路径配置：在build下的util.js中的generateSassResourceLoader中添加publiscPath
+	
+	function generateSassResourceLoader() {
+    var loaders = [
+      cssLoader,
+      // 'postcss-loader',
+      'sass-loader',
+      {
+        loader: 'sass-resources-loader',
+        options: {
+          // it need a absolute path
+          resources: [resolveResouce('base.scss')]
+        }
+      }
+    ];
+    if (options.extract) {
+      return ExtractTextPlugin.extract({
+        use: loaders, 
+
+
+        publicPath: '../../',//这里配置图片路径
+
+
+        fallback: 'vue-style-loader'
+      })
+    } else {
+      return ['vue-style-loader'].concat(loaders)
+    }
+  }
 
 ### 十二、路由按需加载配置之后，路由参数为空的话，路由跳转错误 ###
 业务场景：  
