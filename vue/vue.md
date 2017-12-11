@@ -256,6 +256,16 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
 2、业务有下拉刷新页面的需求，另外bette-scroll插件在内容小于容器高度时不会触发滚动事件，所以此时要启动原生下拉刷新，而对于内容高于容器高度时，可以触发插件的下拉事件，该下拉与原生下拉有冲突（两个下拉同时启动时，插件的不起作用，且内容不能滚动下来）所以此时应禁用原生的下拉事件。
 
 处理方法：在vue的updated钩子函数中获取列表高度，以及容器高度（屏幕高度-容器以外内容高度）当列表高度大于容器高度，禁用原生下拉刷新事件，当列表高度小于容器高度，启用原生下拉刷新事件
+	
+	let topHeight=this.$refs.top.clientHeight;//top部分高度
+    let listHeight=this.$refs.itemUl.clientHeight;//列表高度
+	let bodyHeight=document.documentElement.clientHeight;//body的高度
+    if(listHeight>(bodyHeight-topHeight)){
+	      hm.request({
+	      command:'hm_window://init',
+	      params:'{"refresh_enabled":false}'
+    	});
+    }
 
 ###十四、 updated钩子函数  ###
 	调用时机：由于数据更改导致的虚拟DOM重新渲染和打补丁，在这之后会调用该钩子
@@ -270,17 +280,40 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
     		// entire view has been re-rendered
 		})
 	}
-### Vue.nextTick() 全局api（vm.$nextTick()局部api，组件内调用）###
+###十五、 Vue.nextTick() 全局api（vm.$nextTick()局部api，组件内调用）###
 	1、在Vue的声明周期的created()钩子函数进行DOM操作一定要放在Vue.nextTick()的回调函数中，因为在created()钩子函数执行的时候DOM其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以一定要讲DOM操作放在该函数的回调中，与之对应的mounted钩子函数，该钩子函数执行时所有的DOM挂载和渲染已经完成，此时在钩子函数中进行任何DOM操作都不会有问题
 	
 	2、在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构时，这个操作都应该放在该函数的回调函数中
 
-	
+### 十六、checkbox全选的处理 ###
+	<div class="check-all">
+      <input type="checkbox" v-model="checkAll" @change="_checkAll()">
+      <label for="">全选</label>
+    </div>
+	绑定了vue-model的checkbox的事件处理是用change事件，用click处理的话ios会有兼容性问题
+### 十七、<input v-model.number="age" type="number"> ###
+在type='number'时，html中输入的值也总是返回字符串类型
 
+### 十八 开发阶段跨域请求接口解决方法###
+在webpack的配置中配置开发的代理（config/index）  
 
-	
+	dev: {
+    env: require('./dev.env'),
+    port: process.env.PORT || 8080,
+    autoOpenBrowser: true,
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
 
+    proxyTable: {
+      '/api': {
+        target: 'http://192.168.0.159:19100',//设置你调用的接口域名和端口号 别忘了加http
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''//这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+        }
+      }
+    },
+	//在上面配置代理，仅在开发阶段有效
 
-
-	
-	
+    cssSourceMap: false
+  }
