@@ -5,7 +5,7 @@
 	
 	})
 
-###二、 scoped的作用于 ###
+### 二、 scoped的作用于 ###
 question：为什么父组件添加scoped后不能影响子组件
    
 解决方法：you can	include both scoped and non-scoped styles in the same component  
@@ -14,12 +14,12 @@ question：为什么父组件添加scoped后不能影响子组件
 
 注：A child component's **root** node will be affected by both the parent's scoped css and the child's scoped css(这里指的是子组件的根元素会受父组件scoped作用域的css的影响)
 
-###三、 $el: ###
+### 三、 $el: ###
 
-###四、 $event: ###
+### 四、 $event: ###
 
-###五、 缓存组件 ###
-#### a、vue2.10之前的实现方式： keep-alive与router-view结合####
+### 五、 缓存组件 ###
+#### a、vue2.10之前的实现方式： keep-alive与router-view结合 ####
 app.vue  
 
 	<keep-alive>  
@@ -46,7 +46,7 @@ index.js
 	不是第一次进入keep-alive组建的话，钩子函数的调用顺序：
 	beforeEach->beforeRouteEnter->actived->beforeUpdate->beforeRouteEnter的next函数，created函数，mounted函数不再执行
 
-#### b、vue2.10版本之后keep-alive的include、exclude属性控制组件是否缓存####
+#### b、vue2.10版本之后keep-alive的include、exclude属性控制组件是否缓存 ####
 include、exclude属性允许组件有条件地缓存，二者都可以用逗号分隔字符串，正则表达式或一个数组来表示，当使用正则表达式或者数组时，一定使用v-bind! 	
 
 	<!-- 逗号分隔字符串，只有组件a与b被缓存。这样使用场景变得更有意义了 -->
@@ -134,7 +134,7 @@ include、exclude属性允许组件有条件地缓存，二者都可以用逗号
 	}
 	//不能获取组件实例‘this’,因为当钩子执行前，组件实例还没有被创建
 
-#### beforeRouteUpdate、 beforeRouteLeave中可以直接访问组件实例this####
+#### beforeRouteUpdate、 beforeRouteLeave中可以直接访问组件实例this ####
 
 	beforeRouteUpdate (to, from, next) {
 	    // 在当前路由改变，但是该组件被复用时调用
@@ -165,7 +165,7 @@ include、exclude属性允许组件有条件地缓存，二者都可以用逗号
 	组件中：
 	let hm=new this.HM();
 
-###十、watch监听路由$route,需要深度监听才能触发  ###
+### 十、watch监听路由$route,需要深度监听才能触发  ###
 
 	watch:{
         $route:{
@@ -267,10 +267,10 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
     	});
     }
 
-###十四、 updated钩子函数  ###
+### 十四、 updated钩子函数  ###
 	调用时机：由于数据更改导致的虚拟DOM重新渲染和打补丁，在这之后会调用该钩子
 	
-	由于该钩子调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而大多数情况下，应该避免在此期间更改状态。如果要相应状态改变，通常使用**计算属性**或**watcher**取而代之
+	由于该钩子调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而大多数情况下，应该避免在此期间更改状态。如果要相应状态改变，通常使用**计算属性 **或**watcher**取而代之
 
 	注意：uodated不会承诺所有的子组件也都一起被重绘。如果希望等整个视图都重绘完毕。可以用vm.$nextTick()替换掉updated:
 
@@ -280,7 +280,7 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
     		// entire view has been re-rendered
 		})
 	}
-###十五、 Vue.nextTick() 全局api（vm.$nextTick()局部api，组件内调用）###
+### 十五、 Vue.nextTick() 全局api（vm.$nextTick()局部api，组件内调用）###
 	1、在Vue的声明周期的created()钩子函数进行DOM操作一定要放在Vue.nextTick()的回调函数中，因为在created()钩子函数执行的时候DOM其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以一定要讲DOM操作放在该函数的回调中，与之对应的mounted钩子函数，该钩子函数执行时所有的DOM挂载和渲染已经完成，此时在钩子函数中进行任何DOM操作都不会有问题
 	
 	2、在数据变化后要执行的某个操作，而这个操作需要使用随数据改变而改变的DOM结构时，这个操作都应该放在该函数的回调函数中
@@ -294,7 +294,7 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
 ### 十七、<input v-model.number="age" type="number"> ###
 在type='number'时，html中输入的值也总是返回字符串类型
 
-### 十八 开发阶段跨域请求接口解决方法###
+### 十八 开发阶段跨域请求接口解决方法 ###
 在webpack的配置中配置开发的代理（config/index）  
 
 	dev: {
