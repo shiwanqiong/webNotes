@@ -294,7 +294,7 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
 ### 十七、<input v-model.number="age" type="number"> ###
 在type='number'时，html中输入的值也总是返回字符串类型
 
-### 十八 开发阶段跨域请求接口解决方法 ###
+### 十八、开发阶段跨域请求接口解决方法 ###
 在webpack的配置中配置开发的代理（config/index）  
 
 	dev: {
@@ -316,4 +316,19 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
 	//在上面配置代理，仅在开发阶段有效
 
     cssSourceMap: false
-  }
+    }   
+    
+### 十九、mockjs的应用  
+在前后端分离的项目中，在做一个高保真demo时，可以用mockjs来模拟数据请求，来实现数据交互，达到高保真的目的
+
+### 二十、外层被scroll包括的隐藏的静态数据页面，当其展示出来时，页面不能滚动，
+是因为scroll是在页面加载时根据数据来动态计算页面高度的，而对于页面加载完成时处于隐藏状态的部分，scroll无法计算其高度，故显示出来时无法滚动
+
+### 二十一、递归组件的应用（数据结构为树形的，详见‘会议系统的confereeList组件’）### 十九、判断json对象与json字符串的方法 ###  	//判断是否为json对象		if (typeof(obj.params) == "object" && Object.prototype.toString.call(obj.params).toLowerCase() == "[object object]" && !obj.params.length) {            obj.params = JSON.stringify(obj.params);        }  		//判断是否为json字符串  		if (Object.prototype.toString.call(resp) === "[object String]"){		resp = JSON.parse(resp);	}### 二十二、混合开发过程中与原生交互时数据传输问题 ###通常前端通过原生与服务端交互时，传输使用json字符串，但是对于文本输入过程中的英文''或者其他符号会导致数据解析失败。原因是，服务端会对特殊符号进行转译，原生在接收到服务端的数据时会先解析一遍然后在封装成json字符串，最后传输给前端，原生在解析过程中会将转译符“丢掉”。所以前端解析接收到的数据时就会报错。**解决办法**  更改传输协议，原生在传输回来时直接传输json对象，前端接收到时不需要再解析，对于文本的渲染使用v-html  ### 二十三、根据名字的hash值计算随机的颜色（钉钉用户头像颜色生成原理） ###	//获取hash值	function hashCode (str) {	    var hash = 0;	    if (str.length == 0) return hash;	    for (let i = 0; i < str.length; i++) {	        let char = str.charCodeAt(i);	        hash = ((hash << 5) - hash) + char;	        hash = hash & hash; // Convert to 32bit integer	    }	    return hash;	}		//根据余数来设定hash对应的颜色值	export function getColor(name) {	    if(name!=''&&name!=undefined){	        var hash = Math.abs(hashCode(name));	        var colors = ['#F7980A', '#ED8299','#9997F2', '#6FCF86','#6DC6C7'];	        var colorIndex = hash % (colors.length);	        var color = colors[colorIndex];	        return color;	    }	    else{	      return	    }	}
+
+
+    
+     
+  
+  
+  
