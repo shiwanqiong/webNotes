@@ -362,6 +362,40 @@ app的消息推送要链接到宿舍情况汇总页面，从推送进入到晚�
 	
 	// new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
 
+###二十六、PC端使用elementUI，打包时报错（没有将es6的语法进行转译）
+**解决办法：**  
+
+	修改build/webpack.base.config.js文件
+	修改前：
+	module: {
+		rules: [
+			...
+			{
+			test: /\.js$/,
+			loader: 'babel-loader',
+			include: [resolve('src'), resolve('test')]
+			},
+			...
+		]
+	}
+	修改后：
+	module: {
+		rules: [
+		...
+			{
+			test: /\.js$/,
+			loader: 'babel-loader',//注意elementUI的源码使用ES6需要解析
+			include: [resolve('src'), resolve('test'),resolve('/node_modules/element-ui/src'),resolve('/node_modules/element-ui/packages')]
+			},
+		...
+		]
+	}
+	
+	<!--相当于将elementUI加入需要babel解析的包中-->	
+	
+	
+	
+
 	
 	
 		

@@ -54,7 +54,7 @@
 	//在main.js里注册vue的属性$api
 	
 	import api from './api/index.js'//即上面的方法所在文件路径
-	Vue.property.$api=api
+	Vue.prototype.$api=api
 	
 	//调用：
 	this.$api.get('topics',null,res=>{
